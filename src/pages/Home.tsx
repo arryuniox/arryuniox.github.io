@@ -11,13 +11,13 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Biology, bacteria, and{" "}
+                Biology, ethics, and{" "}
                 <span className="text-primary">badly behaved code.</span>
               </h1>
 
               <div className="prose prose-lg text-muted-foreground max-w-none">
                 <p>
-                  Hi, I'm <span className="text-foreground font-medium">Jed</span> — a high school student with a suspicious amount of free time that I tend to funnel into molecular biology, bacterial genomics, and building pipelines that probably shouldn't work but somehow do.
+                  Hi, I'm <span className="text-foreground font-medium">Jed Lin</span> — a high school student with a suspicious amount of free time that I tend to funnel into molecular biology, bacterial genomics, and building pipelines that probably shouldn't work but somehow do.
                 </p>
                 <br />
                 <p>
