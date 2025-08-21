@@ -48,8 +48,9 @@ const Projects = () => {
     {
       title: "Random Writing Projects",
       description: "A collection of stories, poems, and world-building exercises",
-      details: "DM for them, I guess. I don't usually share them publicly because they're mostly emo and cringe. But if you're into that sort of thing, hit me up.",
+      details: "Emo and cringe, but occasionally insightful and reflective. Read at your own risk. Advice is much appreciated.",
       tags: ["creative-writing", "analysis", "definitely-not-emo"],
+      liveUrl: "https://linktr.ee/arryuniox",
     },
   ];
 
