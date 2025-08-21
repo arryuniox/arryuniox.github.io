@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 
 interface IntroAnimationProps {
   onComplete: () => void;
+  onSkip: () => void;
 }
 
-const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
+const IntroAnimation = ({ onComplete, onSkip }: IntroAnimationProps) => {
   const keywords = ['a biologist', 'a developer', 'an innovator', 'a researcher', 'Jed Lin'];
   const [currentKeyword, setCurrentKeyword] = useState('');
   const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
@@ -18,7 +19,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const isMountedRef = useRef(true);
 
   // Typing speed
-  const typingSpeed = 100;
+  const typingSpeed = 80;
   const deletingSpeed = 40;
   const pauseBetweenWords = 1500;
 
@@ -147,6 +148,15 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           )}
         </div>
       </div>
+      {!isComplete && (
+        <button
+          onClick={onSkip}
+          className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-white/70 hover:text-white text-sm md:text-base transition-colors duration-200 bg-black/20 backdrop-blur-sm px-3 py-1 rounded-md border border-white/20"
+          aria-label="Skip intro animation"
+        >
+          Skip
+        </button>
+      )}
     </div>
   );
 };

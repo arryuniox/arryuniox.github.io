@@ -22,15 +22,20 @@ const App = () => {
   const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
-    // Check if intro has been shown before
-    const hasSeenIntro = localStorage.getItem('hasSeenIntro');
+    // Check if intro has been shown before in this session
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     if (hasSeenIntro) {
       setShowIntro(false);
     }
   }, []);
 
   const handleIntroComplete = () => {
-    localStorage.setItem('hasSeenIntro', 'true');
+    sessionStorage.setItem('hasSeenIntro', 'true');
+    setShowIntro(false);
+  };
+
+  const handleIntroSkip = () => {
+    sessionStorage.setItem('hasSeenIntro', 'true');
     setShowIntro(false);
   };
 
@@ -43,7 +48,7 @@ const App = () => {
           <BrowserRouter>
             <ScrollToTop />
             <div className="min-h-screen bg-background relative">
-              <IntroAnimation onComplete={handleIntroComplete} />
+              <IntroAnimation onComplete={handleIntroComplete} onSkip={handleIntroSkip} />
             </div>
           </BrowserRouter>
         </TooltipProvider>

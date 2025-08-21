@@ -9,17 +9,22 @@ const About = () => {
     "Canadian and British Biology Olympiad gold medalist and USABO semifinalist",
     "Summer Science Program (SSP) acceptance - bacterial stress research",
     "Gold medal at Toronto Science Fair for the genetic engineering of cyanobacteria to sequester carbon",
-    "ML-powered bacterial morphology prediction pipelines",
-    "Genome annotation tools using HMMER and Pfam databases",
-    "BacDive + NCBI datascraper workflow automation"
+    "Worked with the University of Toronto on a project to develop a bioinformatics pipeline for genome annotation and database integration for machine learning models",
+    "Published a paper on mental health in a peer-reviewed journal",
+    "USACO Silver medalist and Codeforces Expert Equivalent on DMOJ (Canadian competitive programming site)",
+    "CAAO (Canadian Association of Amateur Olympiad) national camp and Team Canada for the IAO (International Astronomical Olympiad)",
+    "Top 10% and Top 25% in the USA AAPT (American Association of Physics Teachers) Physics Bowl",
+    "Top 5% and School Champion in the Avogadro Chemistry Contest",
   ];
 
   const chaoticFacts = [
-    "Built a villain manifesto for fun (purely theoretical, I promise)",
+    "Wrote a villain manifesto for fun (purely theoretical, I promise)",
     "Probably reads more NCBI documentation than is medically advisable",
     "Once spent 3 days debugging a pipeline only to find a missing comma",
     "Maintains that cyanobacteria are the most underrated organisms on Earth",
-    "Can explain why pond scum might save the world (with charts)",
+    "Can explain why pond scum will save the world (with charts)",
+    "Texts exclusively in all caps or all lowercase, no in-between",
+    "\"I use linux by the way\"",
     <>Writes <a href='https://allpoetry.com/Arryuniox' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:text-blue-300 underline'>emo poetry</a> and fiction on the side (don't ask)</>,
     <>Has a <a href='https://www.youtube.com/@jeddrumz' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:text-blue-300 underline'>Youtube channel</a> where they post very poorly edited drum videos</>
   ];
@@ -40,23 +45,35 @@ const About = () => {
 
             {/* Mode Toggle */}
             <div className="flex justify-center">
-              <div className="bg-secondary rounded-lg p-1 flex gap-1">
-                <Button
-                  variant={mode === "serious" ? "default" : "ghost"}
-                  size="sm"
+              <div className="relative bg-secondary rounded-lg p-1 flex gap-1 w-64">
+                {/* Sliding background */}
+                <div 
+                  className={`absolute top-1 bottom-1 rounded-md bg-primary transition-all duration-300 ease-in-out ${
+                    mode === "serious" ? "left-1 w-[calc(50%-0.25rem)]" : "left-[calc(50%+0.25rem)] w-[calc(50%-0.25rem)]"
+                  }`}
+                />
+                
+                {/* Toggle buttons */}
+                <button
                   onClick={() => setMode("serious")}
-                  className={mode === "serious" ? "gradient-hero" : ""}
+                  className={`relative z-10 flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    mode === "serious" 
+                      ? "text-primary-foreground" 
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   Serious Mode
-                </Button>
-                <Button
-                  variant={mode === "chaotic" ? "default" : "ghost"}
-                  size="sm"
+                </button>
+                <button
                   onClick={() => setMode("chaotic")}
-                  className={mode === "chaotic" ? "gradient-hero" : ""}
+                  className={`relative z-10 flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    mode === "chaotic" 
+                      ? "text-primary-foreground" 
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   Chaotic Mode
-                </Button>
+                </button>
               </div>
             </div>
 

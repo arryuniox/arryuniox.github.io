@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-bacteria.jpg";
+import { Dna, Code, Trophy } from "lucide-react";
 
 const Home = () => {
   return (
@@ -69,7 +70,7 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center space-y-3">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">🧬</span>
+                <Dna size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold">Molecular Biology</h3>
               <p className="text-muted-foreground">
@@ -79,7 +80,7 @@ const Home = () => {
 
             <div className="text-center space-y-3">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">💻</span>
+                <Code size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold">Bioinformatics</h3>
               <p className="text-muted-foreground">
@@ -89,7 +90,7 @@ const Home = () => {
 
             <div className="text-center space-y-3">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">🏆</span>
+                <Trophy size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold">Competitions</h3>
               <p className="text-muted-foreground">
