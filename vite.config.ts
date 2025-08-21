@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: process.env.NODE_ENV === 'production' ? '/personal-portfolio/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/' : '/',
   plugins: [
     react(),
     mode === 'development' &&
