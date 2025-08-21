@@ -11,6 +11,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   const [isFading, setIsFading] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
   // Use refs to prevent race conditions
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -18,7 +19,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   // Typing speed
   const typingSpeed = 100;
-  const deletingSpeed = 50;
+  const deletingSpeed = 40;
   const pauseBetweenWords = 1500;
 
   useEffect(() => {
@@ -33,13 +34,13 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   useEffect(() => {
     const cursorInterval = setInterval(() => {
-      if (isMountedRef.current) {
+      if (isMountedRef.current && !isComplete) {
         setShowCursor(prev => !prev);
       }
     }, 500);
 
     return () => clearInterval(cursorInterval);
-  }, []);
+  }, [isComplete]);
 
   useEffect(() => {
     if (timeoutRef.current) {
@@ -47,14 +48,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     }
 
     if (currentKeywordIndex >= keywords.length) {
-      // Animation complete, fade out and complete
+      // Animation complete, keep "Jed Lin" on screen
       if (isMountedRef.current) {
-        setIsFading(true);
+        setIsComplete(true);
+        setShowCursor(false); // Hide cursor when complete
         timeoutRef.current = setTimeout(() => {
           if (isMountedRef.current) {
-            onComplete();
+            setIsFading(true);
+            timeoutRef.current = setTimeout(() => {
+              if (isMountedRef.current) {
+                onComplete();
+              }
+            }, 1000);
           }
-        }, 1000);
+        }, 2000); // Give 2 seconds to view "Jed Lin" before fading
       }
       return;
     }
@@ -63,9 +70,16 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       if (!isMountedRef.current) return;
 
       const currentWord = keywords[currentKeywordIndex];
+      const isLastWord = currentKeywordIndex === keywords.length - 1;
       
       if (isDeleting) {
-        // Deleting
+        // Don't delete if it's the last word ("Jed Lin")
+        if (isLastWord) {
+          setIsComplete(true);
+          return;
+        }
+        
+        // Deleting for other words
         if (currentKeyword.length > 0) {
           setCurrentKeyword(prev => prev.slice(0, -1));
           timeoutRef.current = setTimeout(handleTyping, deletingSpeed);
@@ -80,27 +94,45 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           setCurrentKeyword(prev => currentWord.slice(0, prev.length + 1));
           timeoutRef.current = setTimeout(handleTyping, typingSpeed);
         } else {
-          // Word complete, pause then start deleting
-          timeoutRef.current = setTimeout(() => {
-            if (isMountedRef.current) {
-              setIsDeleting(true);
-              timeoutRef.current = setTimeout(handleTyping, pauseBetweenWords);
-            }
-          }, pauseBetweenWords);
+          // Word complete
+          if (isLastWord) {
+            // Last word complete, don't delete
+            setTimeout(() => {
+              if (isMountedRef.current) {
+                setIsComplete(true);
+                timeoutRef.current = setTimeout(() => {
+                  if (isMountedRef.current) {
+                    setIsFading(true);
+                    timeoutRef.current = setTimeout(() => {
+                      if (isMountedRef.current) {
+                        onComplete();
+                      }
+                    }, 1000);
+                  }
+                }, 2000);
+              }
+            }, pauseBetweenWords);
+          } else {
+            // Not last word, pause then start deleting
+            timeoutRef.current = setTimeout(() => {
+              if (isMountedRef.current) {
+                setIsDeleting(true);
+                timeoutRef.current = setTimeout(handleTyping, pauseBetweenWords);
+              }
+            }, pauseBetweenWords);
+          }
         }
       }
     };
 
-    // Start the typing animation
-    const initialDelay = currentKeywordIndex === 0 ? 500 : 100;
-    timeoutRef.current = setTimeout(handleTyping, initialDelay);
+    timeoutRef.current = setTimeout(handleTyping, typingSpeed);
     
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [currentKeyword, currentKeywordIndex, isDeleting, keywords.length, onComplete]);
+  }, [currentKeyword, currentKeywordIndex, isDeleting, keywords.length, onComplete, isComplete]);
 
   return (
     <div className={`fixed inset-0 bg-black flex items-center justify-center transition-opacity duration-1000 ${
@@ -110,7 +142,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <div className="text-white text-4xl md:text-6xl font-mono">
           <span>I am </span>
           <span className="text-primary">{currentKeyword}</span>
-          <span className={`ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
+          {!isComplete && (
+            <span className={`ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
+          )}
         </div>
       </div>
     </div>
