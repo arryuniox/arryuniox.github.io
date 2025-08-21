@@ -1,13 +1,28 @@
 import ProjectCard from "@/components/ProjectCard";
+import { describe } from "node:test";
 
 const Projects = () => {
   const projects = [
+    {
+      title: "Stress Response Genomic Analysis",
+      description: "How bacteria handle existential crises",
+      details: "Characterizing the Development and Mechanisms of Gentamicin Resistance Using Facilitated Evolutionary Pressures and Bioinformatic Analysis. Focuses on understanding how bacteria adapt to stressors and develop resistance, using comparative genomics and experimental evolution techniques.",
+      tags: ["genomics", "bioinformatics", "stress-response", "research"],
+      liveUrl: "https://drive.google.com/file/d/1n1Zzs-8UjfhNu5X_twqsHfKzrS0Z5iNC/view?usp=sharing"
+    },
     {
       title: "Cyanobacteria Carbon Sequestration",
       description: "Genetically engineering pond scum to save the world",
       details: "Engineering cyanobacteria strains for enhanced carbon fixation and survival in varying environmental conditions. Involves genetic modifications, stress testing, and optimization of metabolic pathways. Because if bacteria can survive almost anything, why not put them to work?",
       tags: ["genetic-engineering", "cyanobacteria", "carbon-sequestration", "wet-lab"],
       liveUrl: "https://drive.google.com/file/d/1MpC7DxTRs0efBWmQ740AW4Rru5MRnHfe/view?usp=sharing",
+    },
+    {
+      title: "Canadian High School Big Data Challenge",
+      description: "Analyzing large datasets to uncover hidden patterns",
+      details: "A Geospatial Approach to Identifying Optimal Adolescent Mental Health Service Locations in Toronto. Utilized Python and GIS tools to analyze demographic and health data, identifying gaps in mental health service coverage for adolescents in Toronto.",
+      tags: ["machine-learning", "python", "gis", "mental-health"],
+      liveUrl: "https://drive.google.com/file/d/1XdS68MN-sOnBwD9XHXHOjPuxw80i-sNA/view?usp=sharing",
     },
     {
       title: "Genome Annotation Pipeline",
@@ -29,13 +44,6 @@ const Projects = () => {
       details: "Automated data pipeline that pulls bacterial information from NCBI and BacDive databases, processes it through various analysis tools, and generates standardized reports. Saves approximately 47 hours per week that would otherwise be spent manually copying data between databases.",
       tags: ["automation", "databases", "ncbi", "bacdive", "data-processing"],
       githubUrl: "https://github.com/arryuniox/bacdive-morphology-predictor",
-    },
-    {
-      title: "Stress Response Gene Analysis",
-      description: "How bacteria handle existential crises",
-      details: "Characterizing the Development and Mechanisms of Gentamicin Resistance Using Facilitated Evolutionary Pressures and Bioinformatic Analysis. Focuses on understanding how bacteria adapt to stressors and develop resistance, using comparative genomics and experimental evolution techniques.",
-      tags: ["genomics", "bioinformatics", "stress-response", "research"],
-      liveUrl: "https://drive.google.com/file/d/1n1Zzs-8UjfhNu5X_twqsHfKzrS0Z5iNC/view?usp=sharing"
     },
     {
       title: "Random Writing Projects",
