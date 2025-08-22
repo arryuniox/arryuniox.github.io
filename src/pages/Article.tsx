@@ -125,9 +125,9 @@ const Article = () => {
 
         <br>
 
-      <p class="mb-4">Let me tell you about the time I accidentally created what I can only describe as "bacterial performance art." I was trying to run a simple transformation protocol—the kind of thing you do in your sleep after grad school beats the consciousness out of you—when I made what seemed like a minor error. By "minor error," I mean I somehow confused my competent cells with yesterday's coffee and created a petri dish that looked like Jackson Pollock had a fight with a biology textbook.</p>
+      <p class="mb-4">Picture this: you're running what should be a simple transformation protocol—the scientific equivalent of making toast—when suddenly your petri dishes start looking like they're auditioning for a modern art exhibition. Imagine accidentally creating bacterial colonies so aesthetically pleasing that the Guggenheim calls asking if they're available for purchase.</p>
       
-      <p class="mb-4">The colonies weren't just growing; they were <em>expressing themselves</em>. Swirls of purple and green bacteria arranged in patterns that would make a mathematician weep with either joy or existential dread. My lab partner found me staring at the plates like they contained the secrets of the universe, which, honestly, they might have.</p>
+      <p class="mb-4">These hypothetical colonies wouldn't just be growing; they'd be <em>making artistic statements</em>. We're talking about swirls of purple and green bacteria arranged in patterns so mathematically perfect that Fibonacci would weep tears of pure geometric joy. Your lab partner would find you standing there like you've discovered the bacterial equivalent of the Sistine Chapel ceiling, except it's growing in a plastic dish and smells faintly of agar.</p>
       
       <p class="mb-4">Here's the thing about scientific failure that nobody tells you in undergrad: it's absolutely gorgeous. Success is boring. Success just sits there being successful, like that friend who always gets their life together while you're still figuring out which end of the pipette goes where. But failure? Failure is an artist. Failure creates masterpieces you never could have imagined.</p>
       
