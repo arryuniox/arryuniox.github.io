@@ -151,10 +151,10 @@ const IntroAnimation = ({ onComplete, onSkip }: IntroAnimationProps) => {
       {!isComplete && (
         <button
           onClick={onSkip}
-          className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-white/70 hover:text-white text-sm md:text-base transition-colors duration-200 bg-black/20 backdrop-blur-sm px-3 py-1 rounded-md border border-white/20"
+          className="absolute bottom-6 right-6 md:bottom-8 md:right-8 text-white hover:text-primary text-lg md:text-xl font-medium transition-all duration-1150 bg-primary/20 backdrop-blur-sm px-6 py-3 rounded-lg border-2 border-primary/50 hover:border-primary animate-pulse hover:animate-none hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
           aria-label="Skip intro animation"
         >
-          Skip
+          Skip Intro
         </button>
       )}
     </div>
