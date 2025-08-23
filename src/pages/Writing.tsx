@@ -32,15 +32,6 @@ const Writing = () => {
       type: "Creative Analysis"
     },
     {
-      id: "scientific-failure-beauty",
-      title: "In Defense of Beautiful Failures",
-      excerpt: "Why the most disastrous experiments often yield the most valuable lessons, and how to embrace the chaos of scientific research without losing your mind.",
-      date: "2024-08-20",
-      readTime: "9 min read",
-      tags: ["lab-work", "failure", "humor", "methodology", "learning"],
-      type: "Philosophical Essay",
-    },
-    {
       id: "ethics-engineering-life",
       title: "The Ethics of Engineering Life",
       excerpt: "A philosophical exploration of the moral implications of genetic engineering, synthetic biology, and the responsibilities that come with creating new life forms.",
