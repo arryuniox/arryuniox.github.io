@@ -37,7 +37,7 @@ jobs:
     - name: Build
       run: npm run build
       env:
-        VITE_BASE_PATH: '/${{ github.event.repository.name }}'
+        VITE_BASE_PATH: '/'  # Updated for user page deployment
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
