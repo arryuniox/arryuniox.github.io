@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -6,7 +6,7 @@ interface IntroAnimationProps {
 }
 
 const IntroAnimation = ({ onComplete, onSkip }: IntroAnimationProps) => {
-  const keywords = ['a biologist', 'a developer', 'an innovator', 'a researcher', 'Jed Lin'];
+  const keywords = useMemo(() => ['a biologist', 'a developer', 'an innovator', 'a researcher', 'Jed Lin'], []);
   const [currentKeyword, setCurrentKeyword] = useState('');
   const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -133,7 +133,7 @@ const IntroAnimation = ({ onComplete, onSkip }: IntroAnimationProps) => {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [currentKeyword, currentKeywordIndex, isDeleting, keywords.length, onComplete, isComplete]);
+  }, [currentKeyword, currentKeywordIndex, isDeleting, keywords, keywords.length, onComplete, isComplete]);
 
   return (
     <div className={`fixed inset-0 bg-black flex items-center justify-center transition-opacity duration-1000 ${
