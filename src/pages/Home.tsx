@@ -45,7 +45,7 @@ const Home = () => {
                   size="lg" 
                   variant="secondary"
                   className="bg-primary/10 hover:bg-primary/20"
-                  onClick={() => window.open('/Jed_Lin_Resume_20250813.pdf', '_blank')}
+                  onClick={() => window.open('/JedLin_Resume_20250824.pdf', '_blank')}
                 >
                   Download Resume
                 </Button>

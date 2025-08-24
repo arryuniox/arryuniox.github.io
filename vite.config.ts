@@ -9,4 +9,9 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
 });
