@@ -226,3 +226,99 @@ All colors MUST be HSL.
   width: 0.5px;
   border-radius: 50%;
 }
+
+/* 3D Canvas Styles */
+canvas {
+  display: block;
+}
+
+/* Backdrop blur utilities */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced gradient for 3D experience */
+.gradient-3d {
+  background: linear-gradient(
+    135deg,
+    hsl(174, 55%, 45%, 0.8),
+    hsl(210, 80%, 50%, 0.6),
+    hsl(280, 60%, 45%, 0.8)
+  );
+}
+
+/* Smooth transitions for 3D interactions */
+.transition-3d {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive text scaling */
+.text-responsive {
+  font-size: clamp(1rem, 5vw, 3rem);
+}
+
+/* Custom scrollbar for webkit (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px);
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
