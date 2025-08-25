@@ -65,7 +65,7 @@ const Home = () => {
       </section>
 
       {/* Quick Highlights */}
-      <section className="section-padding bg-secondary/30">
+      <section className="section-padding bg-card">
         <div className="container-width">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center space-y-3">

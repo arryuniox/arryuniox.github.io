@@ -214,7 +214,7 @@ const Article = () => {
 
                             <div className="flex flex-wrap gap-2">
                                 {article.tags.map((tag) => (
-                                    <Badge key={tag} variant="secondary" className="text-xs">
+                                    <Badge key={tag} variant="outline" className="text-xs bg-card text-card-foreground">
                                         {tag}
                                     </Badge>
                                 ))}

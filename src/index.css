@@ -44,7 +44,8 @@ All colors MUST be HSL.
     
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(174 55% 45%), hsl(174 65% 35%));
-    --gradient-card: linear-gradient(180deg, hsl(220 15% 12%), hsl(220 15% 8%));
+    --gradient-card-light: linear-gradient(180deg, hsl(220 15% 95%), hsl(220 15% 90%));
+    --gradient-card-dark: linear-gradient(180deg, hsl(220 15% 12%), hsl(220 15% 8%));
     
     /* Typography */
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -72,7 +73,43 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Already using dark theme as default */
+    --background: 220 15% 8%; /* Dark background */
+    --foreground: 180 8% 92%; /* Light text */
+  }
+
+  .light {
+    --background: 220 15% 98%; /* Light background */
+    --foreground: 220 15% 10%; /* Dark text */
+    
+    --card: 220 15% 95%; /* Light card background */
+    --card-foreground: 220 15% 10%; /* Dark card text */
+    
+    --popover: 220 15% 95%; /* Light popover background */
+    --popover-foreground: 220 15% 10%; /* Dark popover text */
+    
+    --primary: 174 55% 45%; /* Same teal primary color */
+    --primary-foreground: 220 15% 98%; /* Light text on primary */
+    
+    --secondary: 220 15% 90%; /* Light gray secondary */
+    --secondary-foreground: 220 15% 10%; /* Dark text on secondary */
+    
+    --muted: 220 15% 90%; /* Light muted background */
+    --muted-foreground: 220 15% 35%; /* Medium gray text */
+    
+    --accent: 174 55% 45%; /* Same teal accent */
+    --accent-foreground: 220 15% 98%; /* Light text on accent */
+    
+    --destructive: 0 84% 60%; /* Same red destructive */
+    --destructive-foreground: 220 15% 98%; /* Light text on destructive */
+    
+    --border: 220 15% 85%; /* Light border */
+    --input: 220 15% 95%; /* Light input background */
+    --ring: 174 55% 45%; /* Same teal ring */
+    
+    /* Design system tokens - adjusted for light mode */
+    --bio-green: 120 55% 40%; /* Slightly darker green for better contrast */
+    --code-orange: 25 85% 50%; /* Slightly darker orange for better contrast */
+    --notebook-brown: 30 25% 30%; /* Slightly darker brown for better contrast */
   }
 }
 
@@ -110,7 +147,11 @@ All colors MUST be HSL.
   }
   
   .gradient-card {
-    background: var(--gradient-card);
+    background: var(--gradient-card-light);
+  }
+  
+  .dark .gradient-card {
+    background: var(--gradient-card-dark);
   }
 }
 

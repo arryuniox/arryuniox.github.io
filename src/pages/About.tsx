@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTheme } from "@/hooks/use-theme";
 
 const About = () => {
   const [mode, setMode] = useState<"serious" | "chaotic">("serious");
+  const { theme } = useTheme();
 
   const achievements = [
     "Canadian and British Biology Olympiad gold medalist and USABO semifinalist",

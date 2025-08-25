@@ -136,7 +136,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 bg-secondary/50 rounded-lg">
+                <div className="mt-6 p-4 bg-card rounded-lg">
                   <p className="text-sm text-muted-foreground">
                     <strong>Response Time:</strong> Usually within 24-48 hours, unless I'm deep in a
                     particularly stubborn debugging session or have been absorbed by the latest
@@ -149,7 +149,7 @@ const Contact = () => {
 
             {/* Fun Footer */}
             <div className="text-center">
-              <div className="bg-secondary/30 rounded-lg p-6">
+              <div className="bg-card rounded-lg p-6">
                 <p className="text-muted-foreground mb-2">
                   Pro tip: Messages mentioning bacteria, bioinformatics, or interesting research
                   questions get priority processing.

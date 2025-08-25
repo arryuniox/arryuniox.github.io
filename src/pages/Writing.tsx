@@ -131,7 +131,7 @@ const Writing = () => {
 
             {/* Note about content */}
             <div className="text-center">
-              <div className="bg-secondary/50 rounded-lg p-6 max-w-2xl mx-auto">
+              <div className="bg-card rounded-lg p-6 max-w-2xl mx-auto">
                 <p className="text-sm text-muted-foreground">
                   Most of these essays exist in various states of completion across notebooks,
                   Google Docs, and hastily-written phone notes. The fully polished versions

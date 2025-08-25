@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,14 +52,15 @@ const Navigation = () => {
                 key={item.path}
                 to={item.path}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  isActive(item.path)
-                    ? "text-primary bg-secondary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                    isActive(item.path)
+                      ? "text-muted-foreground bg-black/10 dark:bg-white/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
                 } ${isScrolled ? 'text-xs py-1' : ''}`}
               >
                 {item.name}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
@@ -82,8 +84,8 @@ const Navigation = () => {
                   to={item.path}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive(item.path)
-                      ? "text-primary bg-secondary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                      ? "text-primary bg-accent"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >

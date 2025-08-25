@@ -32,7 +32,7 @@ const ProjectCard = ({ title, description, details, githubUrl, liveUrl, articleU
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded-md font-mono"
+              className="px-2 py-1 text-xs bg-card text-card-foreground rounded-md font-mono"
             >
               {tag}
             </span>
