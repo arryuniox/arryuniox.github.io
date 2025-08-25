@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion } from 'framer-motion';
@@ -65,6 +66,15 @@ const Home = () => {
         </div>
       </div>
     </div>
+=======
+import ScrollAnimationSystem from "@/components/ScrollAnimationSystem";
+
+const Home = () => {
+  return (
+    <ScrollAnimationSystem>
+      {/* The content of the scroll animation system will replace the existing content */}
+    </ScrollAnimationSystem>
+>>>>>>> Stashed changes
   );
 };
 
