@@ -4,9 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
 import Slide1Particles from './Slide1Particles.tsx';
 import Slide2AgeCounter from './Slide2AgeCounter.tsx';
+import Slide3Geography from './Slide3Geography.tsx';
 import Slide4Introduction from './Slide4Introduction.tsx';
 import ScrollProgress from './ScrollProgress.tsx';
-import ScrollNavigation from './ScrollNavigation.tsx';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -23,7 +23,7 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Total number of slides
-  const totalSlides = 3;
+  const totalSlides = 4;
 
   // Disable body scroll completely
   useEffect(() => {
@@ -77,58 +77,30 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    let wheelTimeout: NodeJS.Timeout | null = null;
     let touchStartY = 0;
     let touchStartTime = 0;
 
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      console.log(`Wheel event: deltaY=${e.deltaY}, isAnimating=${isAnimating}, currentSlide=${currentSlide}`);
-
-      // Clear existing timeout to prevent rapid firing
-      if (wheelTimeout) {
-        clearTimeout(wheelTimeout);
-      }
-
-      wheelTimeout = setTimeout(() => {
-        const delta = e.deltaY;
-        let targetSlide = currentSlide;
-        let dir: 'up' | 'down' = 'down';
-
-        console.log(`Processing wheel: delta=${delta}, currentSlide=${currentSlide}`);
-
-        if (delta > 20 && currentSlide < totalSlides - 1) { // Lower threshold
-          targetSlide = currentSlide + 1;
-          dir = 'down';
-          console.log(`Wheel down: going to slide ${targetSlide}`);
-        } else if (delta < -20 && currentSlide > 0) { // Lower threshold
-          targetSlide = currentSlide - 1;
-          dir = 'up';
-          console.log(`Wheel up: going to slide ${targetSlide}`);
-        } else {
-          console.log(`Wheel ignored: delta=${delta}, bounds check failed`);
-        }
-
-        if (targetSlide !== currentSlide) {
-          goToSlide(targetSlide, dir);
-        }
-      }, 30); // Reduced debounce time
-    };
-
     const handleTouchStart = (e: TouchEvent) => {
-      e.preventDefault();
+      // Only prevent default if not on globe slide
+      if (currentSlide !== 2) {
+        e.preventDefault();
+      }
       touchStartY = e.touches[0].clientY;
       touchStartTime = Date.now();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      // Only prevent default if not on globe slide
+      if (currentSlide !== 2) {
+        e.preventDefault();
+      }
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      e.preventDefault();
+      // Only prevent default if not on globe slide
+      if (currentSlide !== 2) {
+        e.preventDefault();
+      }
       
       const touchEndY = e.changedTouches[0].clientY;
       const touchEndTime = Date.now();
@@ -186,7 +158,6 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
 
     // Add event listeners to window and container
     const container = containerRef.current;
-    container.addEventListener('wheel', handleWheel, { passive: false });
     container.addEventListener('touchstart', handleTouchStart, { passive: false });
     container.addEventListener('touchmove', handleTouchMove, { passive: false });
     container.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -195,11 +166,9 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
     window.addEventListener('keydown', handleKeyDown, { passive: false });
 
     return () => {
-      if (wheelTimeout) clearTimeout(wheelTimeout);
       if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current);
       
       if (container) {
-        container.removeEventListener('wheel', handleWheel);
         container.removeEventListener('touchstart', handleTouchStart);
         container.removeEventListener('touchmove', handleTouchMove);
         container.removeEventListener('touchend', handleTouchEnd);
@@ -234,8 +203,9 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
   };
 
   const slides = [
-    { component: <Slide1Particles />, bg: 'bg-background' },
+    { component: <Slide1Particles />, bg: 'bg-background', width: 'w-full', height: 'h-full' },
     { component: <Slide2AgeCounter />, bg: 'bg-card' },
+    { component: <Slide3Geography />, bg: 'bg-background' },
     { component: <Slide4Introduction />, bg: 'bg-card' },
   ];
 
@@ -245,9 +215,9 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
       className="relative w-full h-screen overflow-hidden focus:outline-none"
       tabIndex={0}
       style={{ 
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        touchAction: 'none'
+        userSelect: currentSlide === 2 ? 'auto' : 'none',
+        WebkitUserSelect: currentSlide === 2 ? 'auto' : 'none',
+        touchAction: currentSlide === 2 ? 'auto' : 'none'
       }}
     >
       <AnimatePresence mode="wait" custom={direction}>
@@ -261,7 +231,7 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
           transition={slideTransition}
           className={`slide h-screen w-full flex items-center justify-center absolute inset-0 ${slides[currentSlide].bg}`}
         >
-          <div key={`content-${currentSlide}`}>
+          <div key={`content-${currentSlide}`} className="w-full h-full flex items-center justify-center">
             {slides[currentSlide].component}
           </div>
         </motion.section>
@@ -276,18 +246,10 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
           goToSlide(index, dir);
         }}
       />
-      <ScrollNavigation 
-        currentSlide={currentSlide} 
-        totalSlides={totalSlides} 
-        onSlideChange={(index) => {
-          const dir = index > currentSlide ? 'down' : 'up';
-          goToSlide(index, dir);
-        }}
-      />
 
       {/* Instructions */}
       <div className="fixed bottom-4 left-4 text-sm text-muted-foreground opacity-60 z-50">
-        Use scroll wheel, arrow keys, or swipe to navigate • ESC to reset
+        Use arrow keys or swipe to navigate • ESC to reset
       </div>
 
       {/* Debug info

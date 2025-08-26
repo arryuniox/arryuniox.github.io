@@ -1,11 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Dna, Code, Trophy, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Slide4Introduction: React.FC = () => {
+  const navigate = useNavigate();
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
+  };
+
+  const handleViewWork = () => {
+    navigate('/projects');
+  };
+
+  const handleDownloadResume = () => {
+    window.open('/JedLin_Resume_20250824.pdf', '_blank');
   };
 
   const staggerContainer = {
@@ -65,6 +75,7 @@ const Slide4Introduction: React.FC = () => {
               className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/80 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleViewWork}
             >
               View My Work
             </motion.button>
@@ -72,6 +83,7 @@ const Slide4Introduction: React.FC = () => {
               className="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleDownloadResume}
             >
               Download Resume
             </motion.button>

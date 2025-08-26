@@ -290,16 +290,6 @@ const Slide1Particles: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8 }}
       >
-        <div className="flex flex-col items-center gap-2 text-slate-400">
-          <span className="text-sm font-light">Scroll to continue</span>
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="w-5 h-8 border border-slate-400 rounded-full flex justify-center"
-          >
-            <div className="w-1 h-2 bg-slate-400 rounded-full mt-2"></div>
-          </motion.div>
-        </div>
       </motion.div>
     </div>
   );
