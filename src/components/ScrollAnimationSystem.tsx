@@ -49,28 +49,22 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
       return;
     }
 
-    // Force clear animation state if it's been stuck
-    if (isAnimating && animationTimeoutRef.current) {
-      console.log('Forcing clear of stuck animation state');
+    // Clear any existing timeout immediately
+    if (animationTimeoutRef.current) {
       clearTimeout(animationTimeoutRef.current);
-      setIsAnimating(false);
+      animationTimeoutRef.current = null;
     }
 
-    console.log(`✓ Transitioning to slide ${slideIndex} (direction: ${dir})`);
+    // Set animation state and slide change simultaneously
     setIsAnimating(true);
     setDirection(dir);
     setCurrentSlide(slideIndex);
 
-    // Clear any existing timeout
-    if (animationTimeoutRef.current) {
-      clearTimeout(animationTimeoutRef.current);
-    }
-
-    // Set timeout to end animation state - reduced time
+    // Set timeout to end animation state - slightly longer than animation duration
     animationTimeoutRef.current = setTimeout(() => {
       setIsAnimating(false);
       console.log(`✓ Animation completed for slide ${slideIndex}`);
-    }, 600); // Shorter timeout
+    }, 700); // Slightly longer than animation duration to ensure smooth transition
 
   }, [currentSlide, isAnimating, totalSlides]);
 
@@ -111,7 +105,7 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
       console.log(`Touch end: deltaY=${deltaY}, velocity=${velocity}`);
 
       // Require minimum distance and velocity for swipe
-      if (Math.abs(deltaY) > 30 && velocity > 0.2) { // Lower thresholds
+      if (Math.abs(deltaY) > 20 && velocity > 0.1) { // Even lower thresholds for better responsiveness
         let targetSlide = currentSlide;
         let dir: 'up' | 'down' = 'down';
 
@@ -198,8 +192,8 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
 
   const slideTransition = {
     type: 'tween' as const,
-    ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    duration: 0.7, // Reduced duration
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number], // Smoother easing curve
+    duration: 0.4, // Slightly faster duration
   };
 
   const slides = [
