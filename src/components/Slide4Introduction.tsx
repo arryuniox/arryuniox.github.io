@@ -55,7 +55,7 @@ const Slide4Introduction: React.FC = () => {
             </motion.p>
             
             <motion.p variants={textVariants} className="text-primary font-semibold">
-              If you want to talk about molecular genetics, systems biology, or why bacteria are secretly the most metal life forms on Earth, we'll get along.
+              If you want to talk about molecular genetics, systems biology, or why bacteria are the greatest life forms to ever exist on Earth, we'll get along.
             </motion.p>
           </motion.div>
         </motion.div>

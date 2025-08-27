@@ -157,7 +157,7 @@ function LocationMarker({ position, label, description }: { position: THREE.Vect
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
       >
-        <sphereGeometry args={[0.15, 16, 16]} /> {/* Even larger invisible sphere for easier hover */}
+        <sphereGeometry args={[0.3, 16, 16]} /> {/* Even larger invisible sphere for easier hover */}
         <meshStandardMaterial transparent={true} opacity={0} /> {/* Invisible but interactive */}
       </mesh>
       
@@ -167,7 +167,7 @@ function LocationMarker({ position, label, description }: { position: THREE.Vect
         <meshStandardMaterial emissive={new THREE.Color('#ffdd55')} emissiveIntensity={1} color={'#ffd14d'} />
       </mesh>
       
-      <BillboardText label={label} />
+        <BillboardText label={label} position={[0,0,0.3]} />
       {hovered && ( // Render tooltip if hovered
         <Html 
           position={[0, 0.05, 0.02]} 
@@ -194,19 +194,18 @@ function LocationMarker({ position, label, description }: { position: THREE.Vect
   );
 }
 
-function BillboardText({ label }: { label: string }) {
+function BillboardText({ label, position = [0, 0.12, 0.02] }: { label: string; position?: [number, number, number] }) {
   return (
     <Billboard>
       <Text
-        position={[0, 0.08, 0.02]} // Position text higher above the marker to prevent clipping
+        position={position}
         fontSize={0.05}
-        anchorX="center" // Center the text horizontally
-        anchorY="bottom" // Anchor to bottom so text appears above the marker
+        anchorX="center"
+        anchorY="bottom"
         outlineWidth={0.004}
         outlineColor="#000"
-      >
-        {label}
-      </Text>
+        children={label}
+      />
     </Billboard>
   );
 }
@@ -352,7 +351,7 @@ const defaultPos = useMemo(() => new THREE.Vector3(0, 0, 3.2), []);
         <LocationMarker position={pChengdu} label="Chengdu" description={CITIES.Chengdu.description} />
         <LocationMarker position={pBeijing} label="Beijing" description={CITIES.Beijing.description} />
         <LocationMarker position={pToronto} label="Toronto" description={CITIES.Toronto.description} />
-        <LocationMarker position={pAlbion} label="Albion, Michigan" description={CITIES.Albion.description} />
+        <LocationMarker position={pAlbion} label="Albion" description={CITIES.Albion.description} />
         <LocationMarker position={pCuba} label="Cuba" description={CITIES.Cuba.description} />
         <LocationMarker position={pBanff} label="Banff National Park" description={CITIES.Banff.description} />
         <LocationMarker position={pZhangjiajie} label="Zhangjiajie" description={CITIES.Zhangjiajie.description} />

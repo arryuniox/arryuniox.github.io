@@ -64,14 +64,38 @@ const StatCard: React.FC<{ value: number; label: string; description: string }> 
 
 const Slide2AgeCounter: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [heartbeatCount, setHeartbeatCount] = useState(0);
+  const [breathCount, setBreathCount] = useState(0);
   const birthDate = useMemo(() => new Date(2008, 9, 15, 13, 44, 0), []); // October 15, 2008 13:44
 
   useEffect(() => {
     // Use requestAnimationFrame for smoother updates
     let animationFrame: number;
+    let lastUpdate = Date.now();
+    let heartbeatAccumulator = 0;
+    let breathAccumulator = 0;
     
     const updateTime = () => {
+      const now = Date.now();
+      const deltaTime = (now - lastUpdate) / 1000; // in seconds
+      lastUpdate = now;
+      
       setCurrentTime(new Date());
+      
+      // Update heartbeat and breath counters with smooth accumulation
+      heartbeatAccumulator += deltaTime * (70 / 60); // 70 bpm = 70/60 beats per second
+      breathAccumulator += deltaTime * (16 / 60); // 16 breaths per minute = 16/60 breaths per second
+      
+      if (heartbeatAccumulator >= 1) {
+        setHeartbeatCount(prev => prev + Math.floor(heartbeatAccumulator));
+        heartbeatAccumulator %= 1;
+      }
+      
+      if (breathAccumulator >= 1) {
+        setBreathCount(prev => prev + Math.floor(breathAccumulator));
+        breathAccumulator %= 1;
+      }
+      
       animationFrame = requestAnimationFrame(updateTime);
     };
     
@@ -100,14 +124,14 @@ const Slide2AgeCounter: React.FC = () => {
     const totalHours = totalDays * 24 + hours;
     const totalMinutes = totalHours * 60 + minutes;
     const totalSeconds = totalMinutes * 60 + seconds;
-    const estimatedHeartbeats = Math.floor(totalMinutes * 70); // Average 70 bpm
-    const estimatedBreaths = Math.floor(totalMinutes * 16); // Average 16 breaths per minute
+    const estimatedHeartbeats = Math.floor(totalMinutes * 70) + heartbeatCount; // Base + real-time updates
+    const estimatedBreaths = Math.floor(totalMinutes * 16) + breathCount; // Base + real-time updates
 
     return {
       years, months, weeks, days, hours, minutes, seconds,
       totalDays, totalHours, estimatedHeartbeats, estimatedBreaths
     };
-  }, [currentTime, birthDate]);
+  }, [currentTime, birthDate, heartbeatCount, breathCount]);
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-8">
