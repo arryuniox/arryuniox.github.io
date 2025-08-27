@@ -22,6 +22,31 @@ const CITIES = {
     lon: 79.3832,
     description: "I moved to Toronto when I was 6 and I've been living here ever since."
   },
+  Albion: {
+    lat: 42.2475,
+    lon: 84.7532,
+    description: "This is where I spent quite possibly the best 5 weeks of my life up until this point. Working from 6 AM to 10 PM, SSP was an unforgettable and life-changing experience"
+  },
+  Cuba: {
+    lat: 23.1136,
+    lon: 82.3666,
+    description: "My favorite vacation spot. It was a blend of golden beaches and all-you-can-eat buffets as well as rich and complex history influenced by many different cultures."
+  },
+  Banff: {
+    lat: 51.4968,
+    lon: 115.9281,
+    description: "My most recent vacation spot. Took lots of photos (I have yet to color-correct/edit a bunch of them so I won't be posting them yet). A photo gallery might be a new feature that I might want to add to the site."
+  },
+  Zhangjiajie: {
+    lat: 29.1171,
+    lon: -110.4792,
+    description: "Two beautiful places in China that I have yet to have a chance to visit, but I would love to go there during the summer."
+  },
+  Jiuzhaigou: {
+    lat: 33.2529,
+    lon: -103.9180,
+    description: "Two beautiful places in China that I have yet to have a chance to visit, but I would love to go there during the summer."
+  },
 } as const;
 
 type CityKey = keyof typeof CITIES;
@@ -88,18 +113,80 @@ function Globe({ radius = 1 }: { radius?: number }) {
 
 function LocationMarker({ position, label, description }: { position: THREE.Vector3; label: string; description: string }) {
   const [hovered, setHovered] = useState(false); // State to track hover status
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Debug: log hover state changes
+  useEffect(() => {
+    if (hovered) {
+      console.log(`Hovered over: ${label}`);
+    }
+  }, [hovered, label]);
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handlePointerOver = (e: any) => {
+    e.stopPropagation();
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHovered(true);
+    }, 50); // Small delay to prevent flickering
+  };
+
+  const handlePointerOut = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHovered(false);
+    }, 100); // Slightly longer delay to prevent flickering on exit
+  };
+
   return (
     <group position={position.toArray()}>
+      {/* Much larger invisible hitbox for easier hover detection */}
       <mesh
-        onPointerOver={() => setHovered(true)} // Set hover state to true on mouse over
-        onPointerOut={() => setHovered(false)} // Set hover state to false on mouse out
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
       >
-        <sphereGeometry args={[0.01, 16, 16]} />
+        <sphereGeometry args={[0.15, 16, 16]} /> {/* Even larger invisible sphere for easier hover */}
+        <meshStandardMaterial transparent={true} opacity={0} /> {/* Invisible but interactive */}
+      </mesh>
+      
+      {/* Visible marker */}
+      <mesh>
+        <sphereGeometry args={[0.02, 16, 16]} />
         <meshStandardMaterial emissive={new THREE.Color('#ffdd55')} emissiveIntensity={1} color={'#ffd14d'} />
       </mesh>
+      
       <BillboardText label={label} />
       {hovered && ( // Render tooltip if hovered
-        <Html position={[0, 0.02, 0.02]} style={{ background: 'rgba(0, 0, 0, 0.7)', color: 'white', padding: '5px', borderRadius: '5px' }}>
+        <Html 
+          position={[0, 0.05, 0.02]} 
+          style={{ 
+            background: 'rgba(0, 0, 0, 0.95)', 
+            color: 'white', 
+            padding: '16px', 
+            borderRadius: '8px',
+            fontSize: '14px',
+            width: '600px',
+            maxHeight: '100px',
+            overflowY: 'auto',
+            zIndex: 1000,
+            lineHeight: '1.5',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+            backdropFilter: 'blur(8px)',
+            wordWrap: 'break-word'
+          }}
+        >
           {description}
         </Html>
       )}
@@ -111,11 +198,11 @@ function BillboardText({ label }: { label: string }) {
   return (
     <Billboard>
       <Text
-        position={[0, 0.02, 0.02]} // Position text slightly above the marker
-        fontSize={0.06}
+        position={[0, 0.08, 0.02]} // Position text higher above the marker to prevent clipping
+        fontSize={0.05}
         anchorX="center" // Center the text horizontally
         anchorY="bottom" // Anchor to bottom so text appears above the marker
-        outlineWidth={0.003}
+        outlineWidth={0.004}
         outlineColor="#000"
       >
         {label}
@@ -192,7 +279,7 @@ function Scene() {
   const { camera } = useThree();
 
   // Default camera state
-  const defaultPos = useMemo(() => new THREE.Vector3(0, 0.4, 3.2), []);
+const defaultPos = useMemo(() => new THREE.Vector3(0, 0, 3.2), []);
   const defaultTarget = useMemo(() => new THREE.Vector3(0, 0, 0), []);
 
   // Idle behavior control
@@ -203,6 +290,11 @@ function Scene() {
   const pChengdu = useMemo(() => latLonToVector3(CITIES.Chengdu.lat, CITIES.Chengdu.lon, globeRadius), []);
   const pBeijing = useMemo(() => latLonToVector3(CITIES.Beijing.lat, CITIES.Beijing.lon, globeRadius), []);
   const pToronto = useMemo(() => latLonToVector3(CITIES.Toronto.lat, CITIES.Toronto.lon, globeRadius), []);
+  const pAlbion = useMemo(() => latLonToVector3(CITIES.Albion.lat, CITIES.Albion.lon, globeRadius), []);
+  const pCuba = useMemo(() => latLonToVector3(CITIES.Cuba.lat, CITIES.Cuba.lon, globeRadius), []);
+  const pBanff = useMemo(() => latLonToVector3(CITIES.Banff.lat, CITIES.Banff.lon, globeRadius), []);
+  const pZhangjiajie = useMemo(() => latLonToVector3(CITIES.Zhangjiajie.lat, CITIES.Zhangjiajie.lon, globeRadius), []);
+  const pJiuzhaigou = useMemo(() => latLonToVector3(CITIES.Jiuzhaigou.lat, CITIES.Jiuzhaigou.lon, globeRadius), []);
 
   // Ensure camera starts at default
   useEffect(() => {
@@ -260,6 +352,11 @@ function Scene() {
         <LocationMarker position={pChengdu} label="Chengdu" description={CITIES.Chengdu.description} />
         <LocationMarker position={pBeijing} label="Beijing" description={CITIES.Beijing.description} />
         <LocationMarker position={pToronto} label="Toronto" description={CITIES.Toronto.description} />
+        <LocationMarker position={pAlbion} label="Albion, Michigan" description={CITIES.Albion.description} />
+        <LocationMarker position={pCuba} label="Cuba" description={CITIES.Cuba.description} />
+        <LocationMarker position={pBanff} label="Banff National Park" description={CITIES.Banff.description} />
+        <LocationMarker position={pZhangjiajie} label="Zhangjiajie" description={CITIES.Zhangjiajie.description} />
+        <LocationMarker position={pJiuzhaigou} label="Jiuzhaigou" description={CITIES.Jiuzhaigou.description} />
 
         {/* Flight arcs: Chengdu → Beijing → Toronto */}
         <FlightArc from={pChengdu} to={pBeijing} radius={globeRadius} height={0.18} color="#ffc857" dash />
@@ -284,7 +381,7 @@ export default function Slide3Geography() {
   return (
     <div className="w-full h-full" style={{ width: "100%", height: "100%", position: "relative" }}>
       <Canvas
-        camera={{ fov: 45, near: 0.1, far: 100, position: [0, 0.4, 3.2] }}
+        camera={{ fov: 45, near: 0.1, far: 100, position: [0, 0, 3.2] }}
         gl={{ antialias: true, alpha: true }}
       >
         <color attach="background" args={["#000000"]} />
