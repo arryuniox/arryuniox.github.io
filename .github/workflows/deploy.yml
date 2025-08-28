@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [better-vfx-cuz-i-dont-rlly-like-the-rain-rn]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           rm -rf node_modules package-lock.json
-          npm install --force
+          npm install --legacy-peer-deps
 
       - name: Build project
         run: npm run build
