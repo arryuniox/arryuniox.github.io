@@ -1,17 +1,15 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-  },
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+  // This is crucial for GitHub Pages
+  base: process.env.NODE_ENV === 'production' ? '/arryuniox.github.io/' : '/',
+})

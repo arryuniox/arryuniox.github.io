@@ -4,6 +4,13 @@ import { describe } from "node:test";
 const Projects = () => {
   const projects = [
     {
+      title: "Download My Resume",
+      description: "A \"concise\" summary of my professional journey",
+      details: "^ what that said",
+      tags: ["resume", "pdf", "download"],
+      articleUrl: "https://drive.google.com/file/d/1bHNB713kYW2j4No5ce7PqIvH0le5l52I/view?usp=sharing"
+    },
+    {
       title: "Stress Response Genomic Analysis",
       description: "How bacteria handle existential crises",
       details: "Characterizing the Development and Mechanisms of Gentamicin Resistance Using Facilitated Evolutionary Pressures and Bioinformatic Analysis. Focuses on understanding how bacteria adapt to stressors and develop resistance, using comparative genomics and experimental evolution techniques.",

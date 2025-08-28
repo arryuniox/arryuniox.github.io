@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { ThemeProvider } from '@/hooks/use-theme';
 import Navigation from "./components/Navigation";
 import ScrollToTop from "./components/ScrollToTop";
-import RainEffect from "./components/RainEffect";
+import OceanicParticles from "./components/OceanicParticles";
 import IntroAnimation from "./components/IntroAnimation";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -66,7 +66,7 @@ const App = () => {
           <BrowserRouter>
             <ScrollToTop />
             <div className="min-h-screen bg-background relative">
-              <RainEffect />
+              <OceanicParticles />
               <Navigation />
               <Routes>
                 <Route path="/" element={<Home />} />

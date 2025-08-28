@@ -102,6 +102,8 @@ const About = () => {
                         experience with both wet lab techniques and bioinformatics pipelines. I'm particularly
                         interested in the intersection of systems biology and machine learning.
                       </p>
+                      <br />
+                      <a href="https://drive.google.com/file/d/1bHNB713kYW2j4No5ce7PqIvH0le5l52I/view?usp=sharing">View My Resume</a>
                     </div>
                   </CardContent>
                 </Card>
