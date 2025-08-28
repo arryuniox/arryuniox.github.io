@@ -11,5 +11,5 @@ export default defineConfig({
     },
   },
   // This is crucial for GitHub Pages
-  base: process.env.NODE_ENV === 'production' ? '/arryuniox.github.io/' : '/',
+  base: '/',
 })
