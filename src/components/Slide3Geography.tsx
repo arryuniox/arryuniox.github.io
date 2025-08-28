@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars, Text, Html, useTexture, Billboard } from "@react-three/drei";
 
-const EARTH_TEXTURE_URL = "/textures/8k_earth_daymap.jpg"; // put your texture here (public/)
+const EARTH_TEXTURE_URL = "8k_earth_daymap.jpg"; // put your texture here (public/)
 
 // City coordinates (lat, lon in degrees) and descriptions
 const CITIES = {
