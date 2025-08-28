@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
 import Slide1Particles from './Slide1Particles.tsx';
 import Slide2AgeCounter from './Slide2AgeCounter.tsx';
 import Slide3Geography from './Slide3Geography.tsx';
 import Slide4Introduction from './Slide4Introduction.tsx';
 import ScrollProgress from './ScrollProgress.tsx';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollAnimationSystemProps {
   children?: React.ReactNode;
