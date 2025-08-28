@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,56 +10,30 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Setup Node.js
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Clean npm cache
-        run: npm cache clean --force
-      
+          node-version: 18
+          cache: npm
+
       - name: Install dependencies
-        run: npm ci --include=dev
-      
-      - name: Debug - Verify installations
-        run: |
-          echo "Node version: $(node --version)"
-          echo "npm version: $(npm --version)"
-          echo "Checking cross-env:"
-          npx cross-env --version || echo "cross-env not found"
-          echo "Checking vite:"
-          npx vite --version || echo "vite not found"
-          echo "Package.json scripts:"
-          cat package.json | grep -A 10 "scripts"
-      
-      - name: Build for GitHub Pages
-        run: npm run build:gh-pages
-        env:
-          NODE_ENV: production
-          VITE_BASE_URL: '/'
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
-      
+          path: ./dist
+
   deploy:
     environment:
       name: github-pages
@@ -70,4 +43,8 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          cname: arryuniox.github.io
