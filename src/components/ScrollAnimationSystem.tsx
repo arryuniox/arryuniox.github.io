@@ -45,10 +45,10 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
     }
 
     // Clear any existing timeout immediately
-    if (animationTimeoutRef.current) {
-      clearTimeout(animationTimeoutRef.current);
-      animationTimeoutRef.current = null;
-    }
+    // if (animationTimeoutRef.current) {
+    //   clearTimeout(animationTimeoutRef.current);
+    //   animationTimeoutRef.current = null;
+    // }
 
     // Set animation state and slide change simultaneously
     setIsAnimating(true);
@@ -130,6 +130,12 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
       } else if (e.key === 'ArrowUp' && currentSlide > 0) {
         targetSlide = currentSlide - 1;
         dir = 'up';
+      } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+        targetSlide = currentSlide + 1;
+        dir = 'down';
+      } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+        targetSlide = currentSlide - 1;
+        dir = 'up';
       } else if (e.key === 'Escape') {
         // Reset to first slide
         if (currentSlide !== 0) {
@@ -188,7 +194,7 @@ const ScrollAnimationSystem: React.FC<ScrollAnimationSystemProps> = ({ children 
   const slideTransition = {
     type: 'tween' as const,
     ease: [0.4, 0, 0.2, 1] as [number, number, number, number], // Smoother easing curve
-    duration: 0.4, // Slightly faster duration
+    duration: 0, // Slightly faster duration
   };
 
   const slides = [

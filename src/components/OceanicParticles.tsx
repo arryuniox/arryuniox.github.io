@@ -20,7 +20,7 @@ const OceanicParticles: React.FC = () => {
   useEffect(() => {
     const generateParticles = () => {
       const newParticles: OceanParticle[] = [];
-      const particleCount = 80;
+      const particleCount = 50;
 
       const lightModeColors = [
         '#4FC3F7', // Light blue - like shallow water
@@ -52,11 +52,11 @@ const OceanicParticles: React.FC = () => {
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 4 + 1, // Slightly larger particles
+          size: Math.random() * 3 + 1, // Slightly larger particles
           opacity: Math.random() * 0.4 + 0.1, // More visible
           speedX: (Math.random() - 0.5) * 0.6, // Faster horizontal movement
           speedY: (Math.random() - 0.5) * 0.3, // Faster vertical movement
-          glowIntensity: Math.random() * 0.4 + 0.2, // Stronger glow
+          glowIntensity: Math.random() * 0.2 + 0.2, // Stronger glow
           color: colors[colorIndex],
           delay: Math.random() * 3 // Shorter delay
         });
