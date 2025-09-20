@@ -15,7 +15,7 @@ const FAVORITE_TITLES = [
   'The Narrow Road to the Interior',
   'Tuesdays with Morrie',
   'No Longer Human',
-  'The Trial'
+  'The Trial by Kafka'
 ];
 
 const StarRow: React.FC<{ rating?: number }> = ({ rating }) => {

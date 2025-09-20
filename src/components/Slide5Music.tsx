@@ -59,7 +59,7 @@ export default function Slide5MusicCarousel() {
         <div className="w-full mb-6 rounded-lg overflow-hidden bg-card border border-border/60">
           <div className="w-full h-28 md:h-36 lg:h-44 bg-black/5 flex items-center justify-center">
             <iframe
-              key={current.id} // force replace when index changes
+              key={current.id}
               title={`spotify-embed-${current.id}`}
               src={`https://open.spotify.com/embed/track/${current.id}`}
               width="100%"
