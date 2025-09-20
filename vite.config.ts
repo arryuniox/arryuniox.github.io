@@ -10,6 +10,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // This is crucial for GitHub Pages
   base: '/',
+  server: {
+    https: {
+      key: './localhost+1-key.pem',
+      cert: './localhost+1.pem',
+    },
+    host: '0.0.0.0',
+  },
 })
