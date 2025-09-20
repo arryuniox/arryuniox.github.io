@@ -377,3 +377,24 @@ canvas {
     scroll-behavior: auto !important;
   }
 }
+
+/* Force Spotify embed visible if a global rule hides it */
+.spotify-embed-wrapper,
+.spotify-embed-wrapper * {
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+}
+
+.spotify-embed-iframe {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 140px !important;
+  pointer-events: auto !important;
+}
+
+/* If something sets display:none via a specific selector, this should override it.
+   Remove or relax these !important rules once you confirm it works. */

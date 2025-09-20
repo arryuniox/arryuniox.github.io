@@ -57,14 +57,35 @@ export default function Slide5MusicCarousel() {
 
         {/* Spotify embed for selected track */}
         <div className="w-full mb-6 rounded-lg overflow-hidden bg-card border border-border/60">
-          <div className="w-full h-28 md:h-36 lg:h-44 bg-black/5 flex items-center justify-center">
+          <div
+            ref={containerRef}
+            className="spotify-embed-wrapper w-full h-40 md:h-44 lg:h-52 bg-black/5 flex items-center justify-center"
+            style={{
+              position: 'relative',
+              minHeight: 180,
+              zIndex: 20,
+              // remove debug outline once fixed
+              // outline: '2px dashed rgba(59,130,246,0.45)'
+            }}
+          >
             <iframe
               key={current.id}
+              className="spotify-embed-iframe"
               title={`spotify-embed-${current.id}`}
               src={`https://open.spotify.com/embed/track/${current.id}`}
               width="100%"
-              height="120"
+              height="100%"
               frameBorder="0"
+              style={{
+                // keep inline safety but CSS will do the heavy lifting
+                display: 'block',
+                visibility: 'visible',
+                opacity: 1,
+                width: '100%',
+                height: '100%',
+                zIndex: 25,
+                pointerEvents: 'auto'
+              }}
               allow="autoplay; encrypted-media; clipboard-write"
             />
           </div>
