@@ -14,15 +14,6 @@ const Writing = () => {
       type: "Scientific Essay"
     },
     {
-      id: "pond-scum-climate-solutions",
-      title: "Pond Scum and Climate Solutions",
-      excerpt: "How the most underappreciated organisms on the planet might hold keys to carbon sequestration, and why we should probably start taking cyanobacteria more seriously.",
-      date: "2024-01-10",
-      readTime: "10 min read",
-      tags: ["climate-change", "cyanobacteria", "research"],
-      type: "Scientific Essay"
-    },
-    {
       id: "villains-systematic-thinking",
       title: "The Villain's Guide to Systematic Thinking",
       excerpt: "What fictional antagonists can teach us about methodology, long-term planning, and the importance of having backup plans for your backup plans. (Purely theoretical analysis.)",
