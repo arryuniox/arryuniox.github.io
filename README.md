@@ -4,8 +4,15 @@ we're using vite and react.js for this very amazing portfolio and it looks half 
 
 TODO:
 [ ] make the other pages look as alive as the home page
+
 [ ] low quality mode or smth so that it doesnt fry sm poor guy's unc status device
+
 [X] more human aspects of me (spotify songs, albums, and artists; goodreads/book list; something interactive i guess) --> ok im gonna have to unfry my spotify somehow
+
+[ ] my corner (photography, writing, art, etc. everything lumped together kinda instead of just writing and i also want to showcase different and cooler stuff overall i guess)
+
 [ ] make some stuff more obvious/front and center
+
 [ ] rework the layout on other pages so it looks and feels more comfortable
+
 [ ] actually write something new for the blog 😭
