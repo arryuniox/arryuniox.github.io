@@ -10,7 +10,7 @@ const Contact = () => {
       description: "Best for project discussions, research questions, or general inquiries",
       value: "jed.lin1015@gmail.com",
       href: "mailto:jed.lin1015@gmail.com",
-      note: "I typically respond within 24-48 hours (unless I'm debugging something particularly stubborn)"
+      note: "I typically respond within 24-48 hours"
     },
     {
       icon: Github,
@@ -132,17 +132,8 @@ const Contact = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-3 h-3 bg-primary rounded-full"></div>
-                    <span className="text-foreground">Currently debugging bacterial annotation pipelines</span>
+                    <span className="text-foreground">Currently writing an unhealthy amount of university supplemental applications</span>
                   </div>
-                </div>
-
-                <div className="mt-6 p-4 bg-card rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    <strong>Response Time:</strong> Usually within 24-48 hours, unless I'm deep in a
-                    particularly stubborn debugging session or have been absorbed by the latest
-                    bacterial genomics paper. If it's been longer than a week, feel free to send
-                    a follow-up — I probably got distracted by something shiny and scientific.
-                  </p>
                 </div>
               </CardContent>
             </Card>

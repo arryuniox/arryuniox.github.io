@@ -4,33 +4,33 @@ import { Badge } from "@/components/ui/badge";
 
 const Writing = () => {
   const essays = [
-    {
-      id: "bacteria-metal-life-forms",
-      title: "Why Bacteria Are the Most Metal Life Forms on Earth",
-      excerpt: "A deep dive into the extreme survival strategies of microorganisms and what they can teach us about resilience, adaptation, and the fundamental nature of life itself.",
-      date: "2024-02-15",
-      readTime: "8 min read",
-      tags: ["biology", "bacteria", "evolution"],
-      type: "Scientific Essay"
-    },
-    {
-      id: "villains-systematic-thinking",
-      title: "The Villain's Guide to Systematic Thinking",
-      excerpt: "What fictional antagonists can teach us about methodology, long-term planning, and the importance of having backup plans for your backup plans. (Purely theoretical analysis.)",
-      date: "2023-12-05",
-      readTime: "12 min read",
-      tags: ["analysis", "methodology", "creative-writing"],
-      type: "Creative Analysis"
-    },
-    {
-      id: "ethics-engineering-life",
-      title: "The Ethics of Engineering Life",
-      excerpt: "A philosophical exploration of the moral implications of genetic engineering, synthetic biology, and the responsibilities that come with creating new life forms.",
-      date: "2024-03-30",
-      readTime: "11 min read",
-      tags: ["ethics", "genetic-engineering", "philosophy"],
-      type: "Philosophical Essay"
-    }
+    // {
+    //   id: "bacteria-metal-life-forms",
+    //   title: "Why Bacteria Are the Most Metal Life Forms on Earth",
+    //   excerpt: "A deep dive into the extreme survival strategies of microorganisms and what they can teach us about resilience, adaptation, and the fundamental nature of life itself.",
+    //   date: "2024-02-15",
+    //   readTime: "8 min read",
+    //   tags: ["biology", "bacteria", "evolution"],
+    //   type: "Scientific Essay"
+    // },
+    // {
+    //   id: "villains-systematic-thinking",
+    //   title: "The Villain's Guide to Systematic Thinking",
+    //   excerpt: "What fictional antagonists can teach us about methodology, long-term planning, and the importance of having backup plans for your backup plans. (Purely theoretical analysis.)",
+    //   date: "2023-12-05",
+    //   readTime: "12 min read",
+    //   tags: ["analysis", "methodology", "creative-writing"],
+    //   type: "Creative Analysis"
+    // },
+    // {
+    //   id: "ethics-engineering-life",
+    //   title: "The Ethics of Engineering Life",
+    //   excerpt: "A philosophical exploration of the moral implications of genetic engineering, synthetic biology, and the responsibilities that come with creating new life forms.",
+    //   date: "2024-03-30",
+    //   readTime: "11 min read",
+    //   tags: ["ethics", "genetic-engineering", "philosophy"],
+    //   type: "Philosophical Essay"
+    // }
   ];
 
   return (
@@ -42,10 +42,17 @@ const Writing = () => {
               <h1 className="text-4xl md:text-5xl font-bold">
                 Writing & <span className="text-primary">Essays</span>
               </h1>
+
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Thoughts on biology, code, and the intersection of scientific curiosity with
                 questionable life choices. Written during those homework-induced psychosis moments when everything
                 makes perfect sense.
+              </p>
+
+              <br />
+
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                 WIP: Most of these essays exist in various states of completion across notebooks, Google Docs, and hastily-written phone notes. The fully polished versions will appear here once I stop procrastinating.
               </p>
             </div>
 
