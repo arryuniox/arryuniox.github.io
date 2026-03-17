@@ -17,5 +17,8 @@ export default defineConfig({
     //   cert: './localhost+1.pem',
     // },
     host: '0.0.0.0',
+    // mimeTypes: {
+    //   'application/javascript': ['.tsx', '.ts', '.jsx', '.js']
+    // }
   },
 })
