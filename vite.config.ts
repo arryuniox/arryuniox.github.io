@@ -12,10 +12,10 @@ export default defineConfig({
   },
   base: '/',
   server: {
-    https: {
-      key: './localhost+1-key.pem',
-      cert: './localhost+1.pem',
-    },
+    // https: {
+    //   key: './localhost+1-key.pem',
+    //   cert: './localhost+1.pem',
+    // },
     host: '0.0.0.0',
   },
 })
