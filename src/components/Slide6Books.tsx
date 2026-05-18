@@ -4,7 +4,11 @@ import { Star, ExternalLink } from 'lucide-react';
 import type { GBBook } from '@/services/googleBooks';
 import { fetchBookByTitle } from '@/services/googleBooks';
 
-console.log('[Slide6Books] mounted, has Google Books key?', !!(import.meta as any).env?.VITE_GOOGLE_BOOKS_API_KEY);
+const hasApiKey = !!(import.meta as any).env?.VITE_GOOGLE_BOOKS_API_KEY;
+console.log('[Slide6Books] mounted. Google Books API Key configured?', hasApiKey ? 'YES' : 'NO (using unauthenticated requests with low rate limits)');
+if (!hasApiKey) {
+  console.log('[Slide6Books] To enable book covers and links, set VITE_GOOGLE_BOOKS_API_KEY in .env.local');
+}
 
 const FAVORITE_TITLES = [
   'The Metamorphosis',
