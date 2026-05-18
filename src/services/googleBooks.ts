@@ -35,7 +35,7 @@ export async function fetchBookByTitle(title: string): Promise<GBBook | null> {
     console.debug('[googleBooks] requesting', {
       title,
       hasApiKey: !!API_KEY,
-      apiKeySource: (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY ? 'env' : 'AIzaSyBjXyFnr9ukuexJiHVo57x7kZcgSqcN6Ws'
+      apiKeySource: (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY ? 'env' : 'fallback-hardcoded'
     });
 
     const res = await fetch(url);
