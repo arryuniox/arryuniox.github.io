@@ -5,6 +5,7 @@ import  Slide6Books  from "@/components/Slide6Books";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Music, BookOpen, Trophy, Code, Globe, Heart, FileText, ArrowUpRight, Play, Pause, SkipBack, SkipForward, Repeat } from "lucide-react";
 import Slide5Music from "@/components/Slide5Music";
+import { getResume } from "@/lib/cms";
 
 
 interface Widget {
@@ -18,6 +19,7 @@ interface Widget {
 }
 
 const About = () => {
+  const resume = getResume();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -46,8 +48,8 @@ const About = () => {
       size: 'small',
       content: (
         <div className="text-center space-y-4">
-          <p className="text-sm text-muted-foreground">Full experience & qualifications</p>
-          <a href="/JedLin_Resume_20250824.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 px-4 py-2 bg-foreground text-background rounded-lg text-sm font-medium hover:bg-foreground/80 transition-colors group">
+          <p className="text-sm text-muted-foreground">{resume.summary}</p>
+          <a href={resume.pdfUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 px-4 py-2 bg-foreground text-background rounded-lg text-sm font-medium hover:bg-foreground/80 transition-colors group">
             <span>Download</span>
             <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
@@ -65,7 +67,7 @@ const About = () => {
         <div className="space-y-4">
           <h4 className="font-medium text-sm mb-2 text-primary">Research Focus</h4>
           <ul className="space-y-2">
-            {["Bacterial stress response mechanisms", "ML models for phenotype prediction", "Random molecular biology stuff"].map((item, i) => (
+            {resume.researchFocus.map((item, i) => (
               <li key={i} className="text-sm text-foreground/70 flex items-center space-x-2"><div className="w-1 h-1 bg-primary rounded-full"></div><span>{item}</span></li>
             ))}
           </ul>
@@ -100,10 +102,22 @@ const About = () => {
       size: 'large',
       content: (
         <div className="space-y-3">
-          {["NCBI documentation enthusiast", "Cyanobacteria advocate", "\"I use linux btw\"", <><a href='https://allpoetry.com/Arryuniox' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:text-blue-300 underline'>Emo poetry</a> writer (don't ask)</>, <>Mid-tier <a href='https://www.youtube.com/@jeddrumz' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:text-blue-300 underline'>Youtube</a> drummer</>, "Peaked S-rank Tetris Player", "Likes to think that he can draw"].map((fact, index) => (
+          {resume.quickFacts.map((fact, index) => (
             <div key={index} className="text-sm text-foreground/70 flex items-start space-x-2">
               <span className="text-orange-400 mt-0.5 flex-shrink-0 text-xs">●</span>
-              <span className="leading-relaxed">{fact}</span>
+              <span className="leading-relaxed">
+                {fact === "Emo poetry writer" ? (
+                  <>
+                    <a href={resume.links.poetry} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline">Emo poetry</a> writer
+                  </>
+                ) : fact === "Mid-tier Youtube drummer" ? (
+                  <>
+                    Mid-tier <a href={resume.links.youtube} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline">Youtube</a> drummer
+                  </>
+                ) : (
+                  fact
+                )}
+              </span>
             </div>
           ))}
         </div>

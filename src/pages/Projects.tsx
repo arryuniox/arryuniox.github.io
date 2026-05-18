@@ -1,74 +1,8 @@
 import ProjectCard from "@/components/ProjectCard";
-import { describe } from "node:test";
+import { getProjects } from "@/lib/cms";
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Download My Resume",
-      description: "A \"concise\" summary of my professional journey",
-      details: "^ what that said",
-      tags: ["resume", "pdf", "download"],
-      articleUrl: "https://drive.google.com/file/d/1bHNB713kYW2j4No5ce7PqIvH0le5l52I/view?usp=sharing"
-    },
-    {
-      title: "Stress Response Genomic Analysis",
-      description: "How bacteria handle existential crises",
-      details: "Characterizing the Development and Mechanisms of Gentamicin Resistance Using Facilitated Evolutionary Pressures and Bioinformatic Analysis. Focuses on understanding how bacteria adapt to stressors and develop resistance, using comparative genomics and experimental evolution techniques.",
-      tags: ["genomics", "bioinformatics", "stress-response", "research"],
-      articleUrl: "https://drive.google.com/file/d/1n1Zzs-8UjfhNu5X_twqsHfKzrS0Z5iNC/view?usp=sharing"
-    },
-    {
-      title: "Cyanobacteria Carbon Sequestration",
-      description: "Genetically engineering pond scum to save the world",
-      details: "Engineering cyanobacteria strains for enhanced carbon fixation and survival in varying environmental conditions. Involves genetic modifications, stress testing, and optimization of metabolic pathways. Because if bacteria can survive almost anything, why not put them to work?",
-      tags: ["genetic-engineering", "cyanobacteria", "carbon-sequestration", "wet-lab"],
-      articleUrl: "https://drive.google.com/file/d/1MpC7DxTRs0efBWmQ740AW4Rru5MRnHfe/view?usp=sharing",
-    },
-    {
-      title: "Canadian High School Big Data Challenge",
-      description: "Analyzing large datasets to uncover hidden patterns",
-      details: "A Geospatial Approach to Identifying Optimal Adolescent Mental Health Service Locations in Toronto. Utilized Python and GIS tools to analyze demographic and health data, identifying gaps in mental health service coverage for adolescents in Toronto.",
-      tags: ["machine-learning", "python", "gis", "mental-health"],
-      articleUrl: "https://doi.org/10.17975/sfj-2025-014",
-      githubUrl: "https://github.com/arryuniox/a-geospatial-approach-to-identifying-optimal-adolescent-mental-health-service-locations-in-toronto"
-    },
-    {
-      title: "Genome Annotation Pipeline",
-      description: "Making HMMER and GUI cooperate",
-      details: "Automated pipeline for bacterial genome annotation using HMMER for protein domain identification. Features error handling for when bioinformatics tools decide to have opinions, and extensive logging for debugging sessions that last until 3 AM.",
-      tags: ["python", "bioinformatics", "hmmer", "pfam", "genome-analysis"],
-      githubUrl: "https://github.com/arryuniox/i-got-tired-of-using-cli",
-    },
-    {
-      title: "Bacterial Morphology ML Predictor",
-      description: "Teaching machines to recognize bacterial shapes",
-      details: "Machine learning model that predicts bacterial morphology and characteristics from genomic data, integrating BacDive database with NCBI resources. Trained on thousands of bacterial profiles because apparently I enjoy teaching computers to identify microscopic life forms.",
-      tags: ["machine-learning", "python", "bacdive", "ncbi", "morphology"],
-      githubUrl: "https://github.com/arryuniox/bacdive-morphology-predictor",
-    },
-    {
-      title: "(WIP) NCBI + BacDive Workflow Automation",
-      description: "Automating the tedious parts of bioinformatics",
-      details: "Automated data pipeline that pulls bacterial information from NCBI and BacDive databases, processes it through various analysis tools, and generates standardized reports. Saves approximately 47 hours per week that would otherwise be spent manually copying data between databases.",
-      tags: ["automation", "databases", "ncbi", "bacdive", "data-processing"],
-      articleUrl: "https://drive.google.com/file/d/1hNp5QHHjuSPIRdtDFozoXfL575X5Oeey/view?usp=sharing",
-      githubUrl: "https://github.com/arryuniox/bacdive-morphology-predictor",
-    },
-    {
-      title: "Personal Portfolio Website",
-      description: "Showcasing my projects and skills online",
-      details: "A sleek, modern portfolio website built with React and Tailwind CSS to highlight my projects, skills, and experiences. Because if you don't have a personal website in 2024, do you even exist?",
-      tags: ["react", "tailwind-css", "portfolio", "web-development"],
-      githubUrl: "https://github.com/arryuniox/arryuniox.github.io",
-    },
-    {
-      title: "Random Writing Projects",
-      description: "A collection of stories, poems, and world-building exercises",
-      details: "Emo and cringe, but occasionally insightful and reflective. Read at your own risk. Advice is much appreciated.",
-      tags: ["creative-writing", "analysis", "definitely-not-emo"],
-      liveUrl: "https://linktr.ee/arryuniox",
-    },
-  ];
+  const projects = getProjects();
 
   return (
     <div className="min-h-screen pt-24">
