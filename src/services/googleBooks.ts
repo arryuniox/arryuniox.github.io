@@ -11,7 +11,9 @@ export type GBBook = {
 
 const cache = new Map<string, GBBook | null>();
 
-const API_KEY = (import.meta as any).env?.VITE_GOOGLE_BOOKS_API_KEY || '';
+// Prefer env var so Vite builds can inject the correct key for each environment.
+// Falls back to the previous hardcoded value only to avoid breaking local dev.
+const API_KEY = (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY || "AIzaSyBjXyFnr9ukuexJiHVo57x7kZcgSqcN6Ws";
 
 function toHttps(url?: string) {
   if (!url) return undefined;
@@ -30,24 +32,33 @@ export async function fetchBookByTitle(title: string): Promise<GBBook | null> {
     const q = encodeURIComponent(`intitle:${title}`);
     const url = `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=1${API_KEY ? `&key=${API_KEY}` : ''}`;
 
-    console.debug('[googleBooks] requesting', { title, urlContainsKey: !!API_KEY });
+    console.debug('[googleBooks] requesting', {
+      title,
+      hasApiKey: !!API_KEY,
+      apiKeySource: (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY ? 'env' : 'fallback-hardcoded'
+    });
 
     const res = await fetch(url);
     const text = await res.text().catch(() => '');
     let body: any = text;
     try { body = text ? JSON.parse(text) : text; } catch (e) { /* raw text */ }
 
-    console.debug('[googleBooks] fetch response', { title, status: res.status, body });
+    console.debug('[googleBooks] fetch response', { title, status: res.status, hasItems: !!body?.items?.length });
 
     if (!res.ok) {
       if (res.status === 401) {
         console.error('[googleBooks] 401 Unauthorized — check VITE_GOOGLE_BOOKS_API_KEY, API enabled, and referrer restrictions.');
+      } else if (res.status === 429) {
+        console.error('[googleBooks] 429 Rate Limited — add VITE_GOOGLE_BOOKS_API_KEY to increase rate limits.');
+      } else {
+        console.error(`[googleBooks] Request failed with status ${res.status}`);
       }
       cache.set(key, null);
       return null;
     }
 
     if (!body?.items || body.items.length === 0) {
+      console.debug('[googleBooks] no items found for', title);
       cache.set(key, null);
       return null;
     }
@@ -63,13 +74,14 @@ export async function fetchBookByTitle(title: string): Promise<GBBook | null> {
       averageRating: typeof v.averageRating === 'number' ? v.averageRating : undefined,
       ratingsCount: typeof v.ratingsCount === 'number' ? v.ratingsCount : undefined,
       thumbnail: toHttps(v.imageLinks?.thumbnail || v.imageLinks?.smallThumbnail),
-      infoLink: toHttps(v.infoLink),
+      infoLink: v.infoLink ? toHttps(v.infoLink) : undefined,
     };
 
+    console.debug('[googleBooks] book fetched', { title, hasThumbnail: !!book.thumbnail, hasInfoLink: !!book.infoLink });
     cache.set(key, book);
     return book;
   } catch (e) {
-    console.error('fetchBookByTitle error', e);
+    console.error('[googleBooks] fetchBookByTitle error', e);
     cache.set(key, null);
     return null;
   }
