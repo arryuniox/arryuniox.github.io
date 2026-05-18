@@ -13,7 +13,7 @@ const cache = new Map<string, GBBook | null>();
 
 // Prefer env var so Vite builds can inject the correct key for each environment.
 // Falls back to the previous hardcoded value only to avoid breaking local dev.
-const API_KEY = (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY || "";
+const API_KEY = (import.meta as any)?.env?.VITE_GOOGLE_BOOKS_API_KEY || "AIzaSyBjXyFnr9ukuexJiHVo57x7kZcgSqcN6Ws";
 
 function toHttps(url?: string) {
   if (!url) return undefined;
